@@ -26,10 +26,10 @@ import com.bezkoder.spring.jpa.h2.repository.TutorialRepository;
 @RequestMapping("/api")
 public class TutorialController {
 
-	@Autowired
+	
 	TutorialRepository tutorialRepository;
 
-	@GetMapping("/tutorials")
+	@GetMapping("/tutorial")
 	public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
 		try {
 			List<Tutorial> tutorials = new ArrayList<Tutorial>();
@@ -54,6 +54,11 @@ public class TutorialController {
 		Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
 
 		if (tutorialData.isPresent()) {
+			
+			
+			
+			
+			
 			return new ResponseEntity<>(tutorialData.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -67,6 +72,9 @@ public class TutorialController {
 					.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), false));
 			return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
 		} catch (Exception e) {
+			
+			
+			
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -96,10 +104,13 @@ public class TutorialController {
 		}
 	}
 
-	@DeleteMapping("/tutorials")
+	@DeleteMapping("/tutorial")
 	public ResponseEntity<HttpStatus> deleteAllTutorials() {
 		try {
 			tutorialRepository.deleteAll();
+			
+			
+			
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
